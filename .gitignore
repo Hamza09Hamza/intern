@@ -1,0 +1,37 @@
+# macOS system files
+.DS_Store
+
+###############
+# PYTHON (Server/)
+###############
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+*.log
+
+# Virtual environments
+venv/
+tts-venv/
+.env
+.env.*
+
+# Vosk or any downloaded model folders
+Server/vosk-model-fr-0.22/
+
+###############
+# NODE/JS (voice-assistant-tester/)
+###############
+node_modules/
+dist/
+build/
+*.log
+
+# Lock files (optional)
+package-lock.json
+yarn.lock
+
+###############
+# Jupyter (if any notebooks)
+###############
+*.ipynb_checkpoints/
