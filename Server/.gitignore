@@ -1,0 +1,18 @@
+# macOS system files
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+*.log
+
+# Virtual environments
+venv/
+tts-venv/
+.env
+.env.*
+
+# Model folders
+vosk-model-fr-0.22/
