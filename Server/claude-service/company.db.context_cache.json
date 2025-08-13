@@ -1,0 +1,2987 @@
+{
+  "schema_text": "DATABASE SCHEMA ANALYSIS\n==================================================\n\nTABLE: departments\nRows: 25\nColumns:\n  \u2022 dept_id (INTEGER) [PRIMARY KEY] (samples: 1, 2, 3)\n  \u2022 name (TEXT) [NOT NULL] (samples: Dept 1, Dept 2, Dept 3)\n  \u2022 location (TEXT) (samples: Remote, CA, NY)\n  \u2022 budget (REAL) (samples: 645522.23, 1447643.66, 783735.85)\n  \u2022 created_at (TEXT) (samples: 2025-08-09T17:03:32.)\n\nTABLE: employees\nRows: 10,000\nColumns:\n  \u2022 emp_id (INTEGER) [PRIMARY KEY] (samples: 1, 2, 3)\n  \u2022 dept_id (INTEGER) [FK \u2192 departments.dept_id] (samples: 22, 4, 18)\n  \u2022 emp_uuid (TEXT) (samples: d9b3f421-31bf-43b4-8, 25694e57-0433-4ca6-b, cb61f73f-83ef-4cf5-a)\n  \u2022 first_name (TEXT) (samples: Linda, Christopher, Timothy)\n  \u2022 last_name (TEXT) (samples: Brown, Haynes, Powell)\n  \u2022 email (TEXT) (samples: linda.brown.738798@e, christopher.haynes.8, timothy.powell.38816)\n  \u2022 hire_date (TEXT) (samples: 2022-01-17, 2019-09-17, 2015-05-03)\n  \u2022 role (TEXT) (samples: Engineer, QA, Senior Engineer)\n  \u2022 salary (REAL) (samples: 28236.114016923002, 25000.0, 30450.09122566627)\n  \u2022 manager_id (INTEGER) [FK \u2192 employees.emp_id] (samples: 2647, 2525, 5663)\n  \u2022 profile_json (TEXT) (samples: {\"bio\": \"Seem buildi, {\"bio\": \"Smile late , {\"bio\": \"Community b)\n  \u2022 active (INTEGER) (samples: 1)\n  \u2022 created_at (TEXT) (samples: 2025-08-09T17:03:32.)\n  \u2022 updated_at (TEXT) (samples: 2025-08-09T17:03:32.)\nRelationships:\n  \u2022 manager_id \u2192 employees.emp_id\n  \u2022 dept_id \u2192 departments.dept_id\n\nTABLE: projects\nRows: 1,000\nColumns:\n  \u2022 proj_id (INTEGER) [PRIMARY KEY] (samples: 1, 2, 3)\n  \u2022 dept_id (INTEGER) [FK \u2192 departments.dept_id] (samples: 19, 23, 8)\n  \u2022 name (TEXT) (samples: Project Avoid 1, Project Catch 2, Project Political 3)\n  \u2022 description (TEXT) (samples: Case compare number , Democratic thus supp, Collection wife cour)\n  \u2022 start_date (TEXT) (samples: 2021-05-04, 2023-02-20, 2023-06-12)\n  \u2022 end_date (TEXT) (samples: 2022-05-26T00:00:00, 2024-12-03T00:00:00, 2025-12-25T00:00:00)\n  \u2022 status (TEXT) (samples: completed, planned)\n  \u2022 budget (REAL) (samples: 132150.53, 169450.05, 140261.89)\n  \u2022 config_json (TEXT) (samples: {\"stack\": [\"rust\", \", {\"stack\": [\"python\",, {\"stack\": [\"rust\", \")\n  \u2022 created_at (TEXT) (samples: 2025-08-09T17:03:34.)\nRelationships:\n  \u2022 dept_id \u2192 departments.dept_id\n\nTABLE: tasks\nRows: 12,339\nColumns:\n  \u2022 task_id (INTEGER) [PRIMARY KEY] (samples: 1, 2, 3)\n  \u2022 proj_id (INTEGER) [FK \u2192 projects.proj_id] (samples: 1)\n  \u2022 assigned_to (INTEGER) [FK \u2192 employees.emp_id] (samples: 9672, 8574, 7613)\n  \u2022 title (TEXT) (samples: Sort financial look , Great least debate d, Vote whether wear dr)\n  \u2022 description (TEXT) (samples: Common admit if sour, Item myself student , Beat marriage have p)\n  \u2022 status (TEXT) (samples: Done, In Progress)\n  \u2022 priority (INTEGER) (samples: 1, 4, 5)\n  \u2022 due_date (TEXT) (samples: 2026-03-17, 2026-06-03, 2026-03-13)\n  \u2022 created_at (TEXT) (samples: 2025-08-09T17:03:34.)\nRelationships:\n  \u2022 assigned_to \u2192 employees.emp_id\n  \u2022 proj_id \u2192 projects.proj_id\n\nTABLE: clients\nRows: 500\nColumns:\n  \u2022 client_id (INTEGER) [PRIMARY KEY] (samples: 1, 2, 3)\n  \u2022 name (TEXT) (samples: Sparks, Harrison and, Moore PLC, Watkins-Cisneros)\n  \u2022 industry (TEXT) (samples: Manufacturing, Tech, Retail)\n  \u2022 contact_email (TEXT) (samples: williamsmaria@eaton-, ashleybaker@bryant.b, dthompson@cortez.com)\n  \u2022 created_at (TEXT) (samples: 2025-08-09T17:03:34.)\n\nTABLE: contracts\nRows: 1,000\nColumns:\n  \u2022 contract_id (INTEGER) [PRIMARY KEY] (samples: 1, 2, 3)\n  \u2022 client_id (INTEGER) [FK \u2192 clients.client_id] (samples: 309, 45, 121)\n  \u2022 proj_id (INTEGER) [FK \u2192 projects.proj_id] (samples: 299, 182, 663)\n  \u2022 amount (REAL) (samples: 1079983.93, 654977.53, 1093101.62)\n  \u2022 signed_date (TEXT) (samples: 2024-03-31, 2024-02-24, 2024-06-13)\n  \u2022 terms_json (TEXT) (samples: {\"duration_months\": , {\"duration_months\": , {\"duration_months\": )\n  \u2022 created_at (TEXT) (samples: 2025-08-09T17:03:34.)\nRelationships:\n  \u2022 proj_id \u2192 projects.proj_id\n  \u2022 client_id \u2192 clients.client_id\n\nTABLE: skills\nRows: 60\nColumns:\n  \u2022 skill_id (INTEGER) [PRIMARY KEY] (samples: 1, 2, 3)\n  \u2022 name (TEXT) (samples: Python, SQL, Java)\n\nTABLE: employee_skills\nRows: 34,675\nColumns:\n  \u2022 emp_id (INTEGER) [PRIMARY KEY] [FK \u2192 employees.emp_id] (samples: 1, 2, 3)\n  \u2022 skill_id (INTEGER) [PRIMARY KEY] [FK \u2192 skills.skill_id] (samples: 36, 34, 42)\n  \u2022 level (INTEGER) (samples: 1, 2, 5)\nRelationships:\n  \u2022 skill_id \u2192 skills.skill_id\n  \u2022 emp_id \u2192 employees.emp_id\n\nTABLE: emp_projects\nRows: 19,972\nColumns:\n  \u2022 emp_id (INTEGER) [PRIMARY KEY] [FK \u2192 employees.emp_id] (samples: 585, 5053, 4938)\n  \u2022 proj_id (INTEGER) [PRIMARY KEY] [FK \u2192 projects.proj_id] (samples: 845, 406, 880)\n  \u2022 assigned_at (TEXT) (samples: 2025-05-24, 2024-04-29, 2022-12-24)\n  \u2022 role_on_project (TEXT) (samples: contributor, pm, architect)\n  \u2022 allocation_percent (INTEGER) (samples: 29, 23, 95)\nRelationships:\n  \u2022 proj_id \u2192 projects.proj_id\n  \u2022 emp_id \u2192 employees.emp_id\n\nTABLE: assets\nRows: 2,000\nColumns:\n  \u2022 asset_id (INTEGER) [PRIMARY KEY] (samples: 1, 2, 3)\n  \u2022 name (TEXT) (samples: Laptop Air, Laptop Ground, Furniture Simple)\n  \u2022 type (TEXT) (samples: Furniture, Transport, IT)\n  \u2022 owner_emp (INTEGER) [FK \u2192 employees.emp_id] (samples: 4411, 8111, 3370)\n  \u2022 purchase_date (TEXT) (samples: 2021-01-02, 2025-07-02, 2020-03-18)\n  \u2022 value (REAL) (samples: 35375.0, 2918.09, 38569.51)\n  \u2022 metadata_json (TEXT) (samples: {\"warranty_years\": 2, {\"warranty_years\": 4, {\"warranty_years\": 2)\nRelationships:\n  \u2022 owner_emp \u2192 employees.emp_id\n\nTABLE: asset_history\nRows: 5,901\nColumns:\n  \u2022 hist_id (INTEGER) [PRIMARY KEY] (samples: 1, 2, 3)\n  \u2022 asset_id (INTEGER) [FK \u2192 assets.asset_id] (samples: 1)\n  \u2022 change_date (TEXT) (samples: 2025-01-17, 2021-11-21, 2024-09-04)\n  \u2022 note (TEXT) (samples: Enter modern executi, Course over investme, Threat want dog lose)\nRelationships:\n  \u2022 asset_id \u2192 assets.asset_id\n\nTABLE: addresses\nRows: 10,995\nColumns:\n  \u2022 addr_id (INTEGER) [PRIMARY KEY] (samples: 1, 2, 3)\n  \u2022 emp_id (INTEGER) [FK \u2192 employees.emp_id] (samples: 1, 2, 3)\n  \u2022 line1 (TEXT) (samples: 6090 Bell Bridge Apt, 9866 Victoria Canyon, 20863 Patricia Port )\n  \u2022 city (TEXT) (samples: Martinberg, Jillianview, Rogersmouth)\n  \u2022 state (TEXT) (samples: OH, OR, CT)\n  \u2022 postal_code (TEXT) (samples: 57304, 04862, 44649)\n  \u2022 country (TEXT) (samples: Portugal, Bolivia, Uruguay)\n  \u2022 geo (TEXT) (samples: 67.0211,175.271332, -29.872242,-140.9197, -74.798829,24.815327)\n  \u2022 is_primary (INTEGER) (samples: 1)\nRelationships:\n  \u2022 emp_id \u2192 employees.emp_id\n\nTABLE: events\nRows: 30,058\nColumns:\n  \u2022 event_id (INTEGER) [PRIMARY KEY] (samples: 1, 2, 3)\n  \u2022 emp_id (INTEGER) [FK \u2192 employees.emp_id] (samples: 1, 2)\n  \u2022 event_time (TEXT) (samples: 2024-01-14T07:37:35., 2024-12-14T16:53:33., 2023-01-22T12:44:33.)\n  \u2022 event_type (TEXT) (samples: policy_ack, promotion)\n  \u2022 details_json (TEXT) (samples: {\"ip\": \"199.224.186., {\"ip\": \"208.82.37.33, {\"ip\": \"31.94.204.55)\n  \u2022 created_at (TEXT) (samples: 2025-08-09T17:03:36., 2025-08-09T17:03:36., 2025-08-09T17:03:36.)\nRelationships:\n  \u2022 emp_id \u2192 employees.emp_id\n\nTABLE: salaries\nRows: 24,999\nColumns:\n  \u2022 sal_id (INTEGER) [PRIMARY KEY] (samples: 1, 2, 3)\n  \u2022 emp_id (INTEGER) [FK \u2192 employees.emp_id] (samples: 1, 2)\n  \u2022 effective_date (TEXT) (samples: 2024-10-07, 2025-03-25, 2022-03-13)\n  \u2022 salary (REAL) (samples: 71287.43, 52508.66, 22119.79)\n  \u2022 reason (TEXT) (samples: raise, correction, hire)\n  \u2022 created_at (TEXT) (samples: 2025-08-09T17:03:37., 2025-08-09T17:03:37., 2025-08-09T17:03:37.)\nRelationships:\n  \u2022 emp_id \u2192 employees.emp_id\n\nTABLE: audit_log\nRows: 0\nColumns:\n  \u2022 audit_id (INTEGER) [PRIMARY KEY]\n  \u2022 table_name (TEXT)\n  \u2022 action (TEXT)\n  \u2022 row_id (TEXT)\n  \u2022 diff (TEXT)\n  \u2022 created_at (TEXT)\n",
+  "tables": {
+    "departments": {
+      "name": "departments",
+      "columns": {
+        "dept_id": {
+          "name": "dept_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "name": {
+          "name": "name",
+          "type": "TEXT",
+          "nullable": false,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Dept 1",
+            "Dept 2",
+            "Dept 3",
+            "Dept 4"
+          ]
+        },
+        "location": {
+          "name": "location",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Remote",
+            "CA",
+            "NY"
+          ]
+        },
+        "budget": {
+          "name": "budget",
+          "type": "REAL",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            645522.23,
+            1447643.66,
+            783735.85,
+            3415827.49
+          ]
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2025-08-09T17:03:32.978361"
+          ]
+        }
+      },
+      "foreign_keys": [],
+      "row_count": 25,
+      "sample_data": [
+        {
+          "dept_id": 1,
+          "name": "Dept 1",
+          "location": "Remote",
+          "budget": 645522.23,
+          "created_at": "2025-08-09T17:03:32.978361"
+        },
+        {
+          "dept_id": 2,
+          "name": "Dept 2",
+          "location": "Remote",
+          "budget": 1447643.66,
+          "created_at": "2025-08-09T17:03:32.978361"
+        },
+        {
+          "dept_id": 3,
+          "name": "Dept 3",
+          "location": "CA",
+          "budget": 783735.85,
+          "created_at": "2025-08-09T17:03:32.978361"
+        },
+        {
+          "dept_id": 4,
+          "name": "Dept 4",
+          "location": "NY",
+          "budget": 3415827.49,
+          "created_at": "2025-08-09T17:03:32.978361"
+        },
+        {
+          "dept_id": 5,
+          "name": "Dept 5",
+          "location": "MA",
+          "budget": 526000.28,
+          "created_at": "2025-08-09T17:03:32.978361"
+        },
+        {
+          "dept_id": 6,
+          "name": "Dept 6",
+          "location": "DE",
+          "budget": 255735.13,
+          "created_at": "2025-08-09T17:03:32.978361"
+        },
+        {
+          "dept_id": 7,
+          "name": "Dept 7",
+          "location": "NY",
+          "budget": 1171326.08,
+          "created_at": "2025-08-09T17:03:32.978361"
+        },
+        {
+          "dept_id": 8,
+          "name": "Dept 8",
+          "location": "MA",
+          "budget": 3049891.77,
+          "created_at": "2025-08-09T17:03:32.978361"
+        },
+        {
+          "dept_id": 9,
+          "name": "Dept 9",
+          "location": "MA",
+          "budget": 1074304.49,
+          "created_at": "2025-08-09T17:03:32.978361"
+        },
+        {
+          "dept_id": 10,
+          "name": "Dept 10",
+          "location": "Remote",
+          "budget": 3536492.37,
+          "created_at": "2025-08-09T17:03:32.978361"
+        }
+      ],
+      "relationships": []
+    },
+    "employees": {
+      "name": "employees",
+      "columns": {
+        "emp_id": {
+          "name": "emp_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "dept_id": {
+          "name": "dept_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": "departments.dept_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            22,
+            4,
+            18
+          ]
+        },
+        "emp_uuid": {
+          "name": "emp_uuid",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "d9b3f421-31bf-43b4-8364-2858432746e9",
+            "25694e57-0433-4ca6-b46b-0f8b8887de80",
+            "cb61f73f-83ef-4cf5-abff-39cca85c99b4",
+            "6e4cd63d-80d2-46ce-9de7-d83968a7de8a"
+          ]
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Linda",
+            "Christopher",
+            "Timothy"
+          ]
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Brown",
+            "Haynes",
+            "Powell",
+            "Young"
+          ]
+        },
+        "email": {
+          "name": "email",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "linda.brown.738798@example.com",
+            "christopher.haynes.83668@example.com",
+            "timothy.powell.388163@example.com",
+            "christopher.young.638721@example.com"
+          ]
+        },
+        "hire_date": {
+          "name": "hire_date",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2022-01-17",
+            "2019-09-17",
+            "2015-05-03",
+            "2017-06-04"
+          ]
+        },
+        "role": {
+          "name": "role",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Engineer",
+            "QA",
+            "Senior Engineer",
+            "HR"
+          ]
+        },
+        "salary": {
+          "name": "salary",
+          "type": "REAL",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            28236.114016923002,
+            25000.0,
+            30450.09122566627,
+            47170.07320439235
+          ]
+        },
+        "manager_id": {
+          "name": "manager_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": "employees.emp_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            2647,
+            2525,
+            5663,
+            1088
+          ]
+        },
+        "profile_json": {
+          "name": "profile_json",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "{\"bio\": \"Seem building knowledge song mission example trade fine student question indeed.\", \"skills_guess\": [\"go\", \"ml\"]}",
+            "{\"bio\": \"Smile late stay tend president join check develop there suddenly.\", \"skills_guess\": [\"ml\", \"k8s\", \"go\", \"sql\"]}",
+            "{\"bio\": \"Community business yeah recognize trial determine series experience kind make guess sister.\", \"skills_guess\": [\"react\", \"go\", \"python\"]}",
+            "{\"bio\": \"Blood bed goal voice available anyone from student ever decade program.\", \"skills_guess\": [\"sql\", \"k8s\"]}"
+          ]
+        },
+        "active": {
+          "name": "active",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": "1",
+          "sample_values": [
+            1
+          ]
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2025-08-09T17:03:32.978737"
+          ]
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2025-08-09T17:03:32.978737"
+          ]
+        }
+      },
+      "foreign_keys": [
+        {
+          "column": "manager_id",
+          "ref_table": "employees",
+          "ref_column": "emp_id"
+        },
+        {
+          "column": "dept_id",
+          "ref_table": "departments",
+          "ref_column": "dept_id"
+        }
+      ],
+      "row_count": 10000,
+      "sample_data": [
+        {
+          "emp_id": 1,
+          "dept_id": 22,
+          "emp_uuid": "d9b3f421-31bf-43b4-8364-2858432746e9",
+          "first_name": "Linda",
+          "last_name": "Brown",
+          "email": "linda.brown.738798@example.com",
+          "hire_date": "2022-01-17",
+          "role": "Engineer",
+          "salary": 28236.114016923002,
+          "manager_id": 2647,
+          "profile_json": "{\"bio\": \"Seem building knowledge song mission example trade fine student question indeed.\", \"skills_guess\": [\"go\", \"ml\"]}",
+          "active": 1,
+          "created_at": "2025-08-09T17:03:32.978737",
+          "updated_at": "2025-08-09T17:03:32.978737"
+        },
+        {
+          "emp_id": 2,
+          "dept_id": 4,
+          "emp_uuid": "25694e57-0433-4ca6-b46b-0f8b8887de80",
+          "first_name": "Christopher",
+          "last_name": "Haynes",
+          "email": "christopher.haynes.83668@example.com",
+          "hire_date": "2019-09-17",
+          "role": "QA",
+          "salary": 25000.0,
+          "manager_id": 2525,
+          "profile_json": "{\"bio\": \"Smile late stay tend president join check develop there suddenly.\", \"skills_guess\": [\"ml\", \"k8s\", \"go\", \"sql\"]}",
+          "active": 1,
+          "created_at": "2025-08-09T17:03:32.978737",
+          "updated_at": "2025-08-09T17:03:32.978737"
+        },
+        {
+          "emp_id": 3,
+          "dept_id": 22,
+          "emp_uuid": "cb61f73f-83ef-4cf5-abff-39cca85c99b4",
+          "first_name": "Timothy",
+          "last_name": "Powell",
+          "email": "timothy.powell.388163@example.com",
+          "hire_date": "2015-05-03",
+          "role": "Senior Engineer",
+          "salary": 30450.09122566627,
+          "manager_id": 5663,
+          "profile_json": "{\"bio\": \"Community business yeah recognize trial determine series experience kind make guess sister.\", \"skills_guess\": [\"react\", \"go\", \"python\"]}",
+          "active": 1,
+          "created_at": "2025-08-09T17:03:32.978737",
+          "updated_at": "2025-08-09T17:03:32.978737"
+        },
+        {
+          "emp_id": 4,
+          "dept_id": 18,
+          "emp_uuid": "6e4cd63d-80d2-46ce-9de7-d83968a7de8a",
+          "first_name": "Christopher",
+          "last_name": "Young",
+          "email": "christopher.young.638721@example.com",
+          "hire_date": "2017-06-04",
+          "role": "HR",
+          "salary": 47170.07320439235,
+          "manager_id": 1088,
+          "profile_json": "{\"bio\": \"Blood bed goal voice available anyone from student ever decade program.\", \"skills_guess\": [\"sql\", \"k8s\"]}",
+          "active": 1,
+          "created_at": "2025-08-09T17:03:32.978737",
+          "updated_at": "2025-08-09T17:03:32.978737"
+        },
+        {
+          "emp_id": 5,
+          "dept_id": 21,
+          "emp_uuid": "42646679-7c39-4c36-93ec-4f57b75b77cc",
+          "first_name": "Ashley",
+          "last_name": "Kelley",
+          "email": "ashley.kelley.397888@example.com",
+          "hire_date": "2016-07-20",
+          "role": "Engineer",
+          "salary": 25000.0,
+          "manager_id": 9008,
+          "profile_json": "{\"bio\": \"Set soon describe free leave understand wait.\", \"skills_guess\": [\"react\", \"ml\"]}",
+          "active": 1,
+          "created_at": "2025-08-09T17:03:32.978737",
+          "updated_at": "2025-08-09T17:03:32.978737"
+        },
+        {
+          "emp_id": 6,
+          "dept_id": 2,
+          "emp_uuid": "8a53ebbe-ae52-4a9b-9e37-178b7a972106",
+          "first_name": "Walter",
+          "last_name": "Ramirez",
+          "email": "walter.ramirez.883795@example.com",
+          "hire_date": "2021-03-15",
+          "role": "Analyst",
+          "salary": 25000.0,
+          "manager_id": 9719,
+          "profile_json": "{\"bio\": \"Deep either information fall sure consider Democrat check operation run tough or.\", \"skills_guess\": [\"go\", \"python\"]}",
+          "active": 1,
+          "created_at": "2025-08-09T17:03:32.978737",
+          "updated_at": "2025-08-09T17:03:32.978737"
+        },
+        {
+          "emp_id": 7,
+          "dept_id": 9,
+          "emp_uuid": "de21ec63-6739-4eb4-a279-681d95838c12",
+          "first_name": "Daniel",
+          "last_name": "Escobar",
+          "email": "daniel.escobar.844152@example.com",
+          "hire_date": "2025-03-17",
+          "role": "Senior Engineer",
+          "salary": 48513.937547411464,
+          "manager_id": 2323,
+          "profile_json": "{\"bio\": \"Hour receive difference score ten science keep civil pass important within civil make democratic.\", \"skills_guess\": [\"sql\"]}",
+          "active": 1,
+          "created_at": "2025-08-09T17:03:32.978737",
+          "updated_at": "2025-08-09T17:03:32.978737"
+        },
+        {
+          "emp_id": 8,
+          "dept_id": 23,
+          "emp_uuid": "b26c4017-303f-4a6f-aa5e-20624d980064",
+          "first_name": "Meredith",
+          "last_name": "Mack",
+          "email": "meredith.mack.957493@example.com",
+          "hire_date": "2024-10-14",
+          "role": "DevOps",
+          "salary": 32328.91676454367,
+          "manager_id": 1226,
+          "profile_json": "{\"bio\": \"Art party rise represent prepare firm force miss vote according song.\", \"skills_guess\": [\"sql\", \"react\", \"k8s\"]}",
+          "active": 1,
+          "created_at": "2025-08-09T17:03:32.978737",
+          "updated_at": "2025-08-09T17:03:32.978737"
+        },
+        {
+          "emp_id": 9,
+          "dept_id": 21,
+          "emp_uuid": "6cd71d6e-8ae8-40dc-8dce-ef35bc984bed",
+          "first_name": "Mary",
+          "last_name": "Schmidt",
+          "email": "mary.schmidt.414851@example.com",
+          "hire_date": "2022-06-19",
+          "role": "QA",
+          "salary": 25000.0,
+          "manager_id": 1754,
+          "profile_json": "{\"bio\": \"Wonder culture reduce there help reality member stop whose.\", \"skills_guess\": [\"sql\", \"ml\", \"go\", \"aws\"]}",
+          "active": 1,
+          "created_at": "2025-08-09T17:03:32.978737",
+          "updated_at": "2025-08-09T17:03:32.978737"
+        },
+        {
+          "emp_id": 10,
+          "dept_id": 9,
+          "emp_uuid": "b6745d26-4e79-40e0-a2e8-edcef0f4672c",
+          "first_name": "Arthur",
+          "last_name": "Li",
+          "email": "arthur.li.781178@example.com",
+          "hire_date": "2015-11-24",
+          "role": "Manager",
+          "salary": 28890.844418872166,
+          "manager_id": 1702,
+          "profile_json": "{\"bio\": \"Challenge indicate write share wrong job far.\", \"skills_guess\": [\"aws\", \"k8s\", \"ml\", \"sql\"]}",
+          "active": 1,
+          "created_at": "2025-08-09T17:03:32.978737",
+          "updated_at": "2025-08-09T17:03:32.978737"
+        }
+      ],
+      "relationships": []
+    },
+    "projects": {
+      "name": "projects",
+      "columns": {
+        "proj_id": {
+          "name": "proj_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "dept_id": {
+          "name": "dept_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": "departments.dept_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            19,
+            23,
+            8,
+            24
+          ]
+        },
+        "name": {
+          "name": "name",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Project Avoid 1",
+            "Project Catch 2",
+            "Project Political 3",
+            "Project School 4"
+          ]
+        },
+        "description": {
+          "name": "description",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Case compare number top student policy environment detail.",
+            "Democratic thus support represent area care standard shoulder.",
+            "Collection wife course let she prevent.",
+            "Race almost begin laugh physical laugh."
+          ]
+        },
+        "start_date": {
+          "name": "start_date",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2021-05-04",
+            "2023-02-20",
+            "2023-06-12",
+            "2019-12-27"
+          ]
+        },
+        "end_date": {
+          "name": "end_date",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2022-05-26T00:00:00",
+            "2024-12-03T00:00:00",
+            "2025-12-25T00:00:00",
+            "2022-05-31T00:00:00"
+          ]
+        },
+        "status": {
+          "name": "status",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "completed",
+            "planned"
+          ]
+        },
+        "budget": {
+          "name": "budget",
+          "type": "REAL",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            132150.53,
+            169450.05,
+            140261.89,
+            211041.8
+          ]
+        },
+        "config_json": {
+          "name": "config_json",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "{\"stack\": [\"rust\", \"java\"], \"priority\": 2}",
+            "{\"stack\": [\"python\", \"rust\"], \"priority\": 1}",
+            "{\"stack\": [\"rust\", \"node\"], \"priority\": 2}",
+            "{\"stack\": [\"node\", \"python\"], \"priority\": 4}"
+          ]
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2025-08-09T17:03:34.125620"
+          ]
+        }
+      },
+      "foreign_keys": [
+        {
+          "column": "dept_id",
+          "ref_table": "departments",
+          "ref_column": "dept_id"
+        }
+      ],
+      "row_count": 1000,
+      "sample_data": [
+        {
+          "proj_id": 1,
+          "dept_id": 19,
+          "name": "Project Avoid 1",
+          "description": "Case compare number top student policy environment detail.",
+          "start_date": "2021-05-04",
+          "end_date": "2022-05-26T00:00:00",
+          "status": "completed",
+          "budget": 132150.53,
+          "config_json": "{\"stack\": [\"rust\", \"java\"], \"priority\": 2}",
+          "created_at": "2025-08-09T17:03:34.125620"
+        },
+        {
+          "proj_id": 2,
+          "dept_id": 23,
+          "name": "Project Catch 2",
+          "description": "Democratic thus support represent area care standard shoulder.",
+          "start_date": "2023-02-20",
+          "end_date": "2024-12-03T00:00:00",
+          "status": "completed",
+          "budget": 169450.05,
+          "config_json": "{\"stack\": [\"python\", \"rust\"], \"priority\": 1}",
+          "created_at": "2025-08-09T17:03:34.125620"
+        },
+        {
+          "proj_id": 3,
+          "dept_id": 8,
+          "name": "Project Political 3",
+          "description": "Collection wife course let she prevent.",
+          "start_date": "2023-06-12",
+          "end_date": "2025-12-25T00:00:00",
+          "status": "planned",
+          "budget": 140261.89,
+          "config_json": "{\"stack\": [\"rust\", \"node\"], \"priority\": 2}",
+          "created_at": "2025-08-09T17:03:34.125620"
+        },
+        {
+          "proj_id": 4,
+          "dept_id": 24,
+          "name": "Project School 4",
+          "description": "Race almost begin laugh physical laugh.",
+          "start_date": "2019-12-27",
+          "end_date": "2022-05-31T00:00:00",
+          "status": "completed",
+          "budget": 211041.8,
+          "config_json": "{\"stack\": [\"node\", \"python\"], \"priority\": 4}",
+          "created_at": "2025-08-09T17:03:34.125620"
+        },
+        {
+          "proj_id": 5,
+          "dept_id": 4,
+          "name": "Project Admit 5",
+          "description": "Training next experience.",
+          "start_date": "2023-09-03",
+          "end_date": "2026-04-04T00:00:00",
+          "status": "completed",
+          "budget": 319717.85,
+          "config_json": "{\"stack\": [\"go\", \"rust\"], \"priority\": 2}",
+          "created_at": "2025-08-09T17:03:34.125620"
+        },
+        {
+          "proj_id": 6,
+          "dept_id": 12,
+          "name": "Project Heart 6",
+          "description": "Trip cup once while first war.",
+          "start_date": "2021-11-21",
+          "end_date": "2024-08-15T00:00:00",
+          "status": "planned",
+          "budget": 122895.78,
+          "config_json": "{\"stack\": [\"rust\", \"go\"], \"priority\": 2}",
+          "created_at": "2025-08-09T17:03:34.125620"
+        },
+        {
+          "proj_id": 7,
+          "dept_id": 22,
+          "name": "Project Road 7",
+          "description": "Unit check window production.",
+          "start_date": "2025-08-06",
+          "end_date": "2025-12-16T00:00:00",
+          "status": "completed",
+          "budget": 300082.05,
+          "config_json": "{\"stack\": [\"node\", \"rust\"], \"priority\": 2}",
+          "created_at": "2025-08-09T17:03:34.125620"
+        },
+        {
+          "proj_id": 8,
+          "dept_id": 4,
+          "name": "Project Clearly 8",
+          "description": "Once model allow should.",
+          "start_date": "2020-12-12",
+          "end_date": "2021-06-06T00:00:00",
+          "status": "active",
+          "budget": 121832.79,
+          "config_json": "{\"stack\": [\"node\", \"python\"], \"priority\": 1}",
+          "created_at": "2025-08-09T17:03:34.125620"
+        },
+        {
+          "proj_id": 9,
+          "dept_id": 2,
+          "name": "Project Both 9",
+          "description": "One another painting painting music front significant.",
+          "start_date": "2020-09-29",
+          "end_date": "2023-05-11T00:00:00",
+          "status": "active",
+          "budget": 115237.28,
+          "config_json": "{\"stack\": [\"rust\", \"go\"], \"priority\": 1}",
+          "created_at": "2025-08-09T17:03:34.125620"
+        },
+        {
+          "proj_id": 10,
+          "dept_id": 1,
+          "name": "Project Animal 10",
+          "description": "Develop talk member.",
+          "start_date": "2023-06-21",
+          "end_date": "2024-07-19T00:00:00",
+          "status": "active",
+          "budget": 281859.46,
+          "config_json": "{\"stack\": [\"java\", \"python\"], \"priority\": 3}",
+          "created_at": "2025-08-09T17:03:34.125620"
+        }
+      ],
+      "relationships": []
+    },
+    "tasks": {
+      "name": "tasks",
+      "columns": {
+        "task_id": {
+          "name": "task_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "proj_id": {
+          "name": "proj_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": "projects.proj_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1
+          ]
+        },
+        "assigned_to": {
+          "name": "assigned_to",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": "employees.emp_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            9672,
+            8574,
+            7613,
+            7420
+          ]
+        },
+        "title": {
+          "name": "title",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Sort financial look quickly piece.",
+            "Great least debate difference sometimes either anything exactly.",
+            "Vote whether wear draw will oil.",
+            "Too behind fear particular."
+          ]
+        },
+        "description": {
+          "name": "description",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Common admit if source bar.",
+            "Item myself student produce official with.",
+            "Beat marriage have part scientist too.",
+            "Cost benefit arm front any through national. Become any democratic officer drive western."
+          ]
+        },
+        "status": {
+          "name": "status",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Done",
+            "In Progress"
+          ]
+        },
+        "priority": {
+          "name": "priority",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            4,
+            5
+          ]
+        },
+        "due_date": {
+          "name": "due_date",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2026-03-17",
+            "2026-06-03",
+            "2026-03-13",
+            "2024-12-24"
+          ]
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2025-08-09T17:03:34.160513"
+          ]
+        }
+      },
+      "foreign_keys": [
+        {
+          "column": "assigned_to",
+          "ref_table": "employees",
+          "ref_column": "emp_id"
+        },
+        {
+          "column": "proj_id",
+          "ref_table": "projects",
+          "ref_column": "proj_id"
+        }
+      ],
+      "row_count": 12339,
+      "sample_data": [
+        {
+          "task_id": 1,
+          "proj_id": 1,
+          "assigned_to": 9672,
+          "title": "Sort financial look quickly piece.",
+          "description": "Common admit if source bar.",
+          "status": "Done",
+          "priority": 1,
+          "due_date": "2026-03-17",
+          "created_at": "2025-08-09T17:03:34.160513"
+        },
+        {
+          "task_id": 2,
+          "proj_id": 1,
+          "assigned_to": 8574,
+          "title": "Great least debate difference sometimes either anything exactly.",
+          "description": "Item myself student produce official with.",
+          "status": "Done",
+          "priority": 4,
+          "due_date": "2026-06-03",
+          "created_at": "2025-08-09T17:03:34.160513"
+        },
+        {
+          "task_id": 3,
+          "proj_id": 1,
+          "assigned_to": 7613,
+          "title": "Vote whether wear draw will oil.",
+          "description": "Beat marriage have part scientist too.",
+          "status": "In Progress",
+          "priority": 4,
+          "due_date": "2026-03-13",
+          "created_at": "2025-08-09T17:03:34.160513"
+        },
+        {
+          "task_id": 4,
+          "proj_id": 1,
+          "assigned_to": 7420,
+          "title": "Too behind fear particular.",
+          "description": "Cost benefit arm front any through national. Become any democratic officer drive western.",
+          "status": "In Progress",
+          "priority": 5,
+          "due_date": "2024-12-24",
+          "created_at": "2025-08-09T17:03:34.160513"
+        },
+        {
+          "task_id": 5,
+          "proj_id": 1,
+          "assigned_to": 398,
+          "title": "Grow marriage feel know.",
+          "description": "Girl doctor remember up look mean current. Second decade generation tonight part loss spring.",
+          "status": "In Progress",
+          "priority": 4,
+          "due_date": "2025-12-10",
+          "created_at": "2025-08-09T17:03:34.160513"
+        },
+        {
+          "task_id": 6,
+          "proj_id": 1,
+          "assigned_to": 7489,
+          "title": "Smile finish operation represent activity.",
+          "description": "Sound across trade late form into. Apply bank determine summer.",
+          "status": "Pending",
+          "priority": 3,
+          "due_date": "2025-07-07",
+          "created_at": "2025-08-09T17:03:34.160513"
+        },
+        {
+          "task_id": 7,
+          "proj_id": 1,
+          "assigned_to": 8,
+          "title": "Person fire the form sure might.",
+          "description": "Cost more and ability between stand. Huge be growth something reach information stock.",
+          "status": "Pending",
+          "priority": 3,
+          "due_date": "2026-07-17",
+          "created_at": "2025-08-09T17:03:34.160513"
+        },
+        {
+          "task_id": 8,
+          "proj_id": 1,
+          "assigned_to": 6176,
+          "title": "Own life cost to activity.",
+          "description": "Else course stuff surface position too threat.",
+          "status": "Done",
+          "priority": 1,
+          "due_date": "2025-01-24",
+          "created_at": "2025-08-09T17:03:34.160513"
+        },
+        {
+          "task_id": 9,
+          "proj_id": 1,
+          "assigned_to": 8647,
+          "title": "Goal level next nor also measure ability.",
+          "description": "Themselves start detail radio into physical. Among ago money radio cup relate.",
+          "status": "Blocked",
+          "priority": 5,
+          "due_date": "2025-05-19",
+          "created_at": "2025-08-09T17:03:34.160513"
+        },
+        {
+          "task_id": 10,
+          "proj_id": 1,
+          "assigned_to": 8878,
+          "title": "Trade page product artist art cell building light.",
+          "description": "Conference war at space center discover choose. Network keep outside bank still charge.",
+          "status": "Pending",
+          "priority": 4,
+          "due_date": "2025-06-24",
+          "created_at": "2025-08-09T17:03:34.160513"
+        }
+      ],
+      "relationships": []
+    },
+    "clients": {
+      "name": "clients",
+      "columns": {
+        "client_id": {
+          "name": "client_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "name": {
+          "name": "name",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Sparks, Harrison and Hudson",
+            "Moore PLC",
+            "Watkins-Cisneros",
+            "Davila-Garcia"
+          ]
+        },
+        "industry": {
+          "name": "industry",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Manufacturing",
+            "Tech",
+            "Retail",
+            "Healthcare"
+          ]
+        },
+        "contact_email": {
+          "name": "contact_email",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "williamsmaria@eaton-nguyen.info",
+            "ashleybaker@bryant.biz",
+            "dthompson@cortez.com",
+            "john59@wiley-willis.biz"
+          ]
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2025-08-09T17:03:34.636401"
+          ]
+        }
+      },
+      "foreign_keys": [],
+      "row_count": 500,
+      "sample_data": [
+        {
+          "client_id": 1,
+          "name": "Sparks, Harrison and Hudson",
+          "industry": "Manufacturing",
+          "contact_email": "williamsmaria@eaton-nguyen.info",
+          "created_at": "2025-08-09T17:03:34.636401"
+        },
+        {
+          "client_id": 2,
+          "name": "Moore PLC",
+          "industry": "Tech",
+          "contact_email": "ashleybaker@bryant.biz",
+          "created_at": "2025-08-09T17:03:34.636401"
+        },
+        {
+          "client_id": 3,
+          "name": "Watkins-Cisneros",
+          "industry": "Retail",
+          "contact_email": "dthompson@cortez.com",
+          "created_at": "2025-08-09T17:03:34.636401"
+        },
+        {
+          "client_id": 4,
+          "name": "Davila-Garcia",
+          "industry": "Healthcare",
+          "contact_email": "john59@wiley-willis.biz",
+          "created_at": "2025-08-09T17:03:34.636401"
+        },
+        {
+          "client_id": 5,
+          "name": "Pruitt, Clark and Howell",
+          "industry": "Education",
+          "contact_email": "tara46@scott.net",
+          "created_at": "2025-08-09T17:03:34.636401"
+        },
+        {
+          "client_id": 6,
+          "name": "Rose LLC",
+          "industry": "Manufacturing",
+          "contact_email": "bowmanthomas@harvey.com",
+          "created_at": "2025-08-09T17:03:34.636401"
+        },
+        {
+          "client_id": 7,
+          "name": "Clark, Parker and Baldwin",
+          "industry": "Healthcare",
+          "contact_email": "michaelhanna@hendricks.com",
+          "created_at": "2025-08-09T17:03:34.636401"
+        },
+        {
+          "client_id": 8,
+          "name": "Davis and Sons",
+          "industry": "Retail",
+          "contact_email": "hojames@cummings.biz",
+          "created_at": "2025-08-09T17:03:34.636401"
+        },
+        {
+          "client_id": 9,
+          "name": "Floyd LLC",
+          "industry": "Retail",
+          "contact_email": "michellejohnson@moore-strickland.com",
+          "created_at": "2025-08-09T17:03:34.636401"
+        },
+        {
+          "client_id": 10,
+          "name": "Young, Mosley and Farrell",
+          "industry": "Manufacturing",
+          "contact_email": "stevencarney@ford-jimenez.info",
+          "created_at": "2025-08-09T17:03:34.636401"
+        }
+      ],
+      "relationships": []
+    },
+    "contracts": {
+      "name": "contracts",
+      "columns": {
+        "contract_id": {
+          "name": "contract_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "client_id": {
+          "name": "client_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": "clients.client_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            309,
+            45,
+            121,
+            249
+          ]
+        },
+        "proj_id": {
+          "name": "proj_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": "projects.proj_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            299,
+            182,
+            663,
+            305
+          ]
+        },
+        "amount": {
+          "name": "amount",
+          "type": "REAL",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1079983.93,
+            654977.53,
+            1093101.62,
+            387229.88
+          ]
+        },
+        "signed_date": {
+          "name": "signed_date",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2024-03-31",
+            "2024-02-24",
+            "2024-06-13",
+            "2021-05-26"
+          ]
+        },
+        "terms_json": {
+          "name": "terms_json",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "{\"duration_months\": 55, \"sla\": \"standard\"}",
+            "{\"duration_months\": 52, \"sla\": \"premium\"}",
+            "{\"duration_months\": 9, \"sla\": \"premium\"}",
+            "{\"duration_months\": 54, \"sla\": \"premium\"}"
+          ]
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2025-08-09T17:03:34.740133"
+          ]
+        }
+      },
+      "foreign_keys": [
+        {
+          "column": "proj_id",
+          "ref_table": "projects",
+          "ref_column": "proj_id"
+        },
+        {
+          "column": "client_id",
+          "ref_table": "clients",
+          "ref_column": "client_id"
+        }
+      ],
+      "row_count": 1000,
+      "sample_data": [
+        {
+          "contract_id": 1,
+          "client_id": 309,
+          "proj_id": 299,
+          "amount": 1079983.93,
+          "signed_date": "2024-03-31",
+          "terms_json": "{\"duration_months\": 55, \"sla\": \"standard\"}",
+          "created_at": "2025-08-09T17:03:34.740133"
+        },
+        {
+          "contract_id": 2,
+          "client_id": 45,
+          "proj_id": 182,
+          "amount": 654977.53,
+          "signed_date": "2024-02-24",
+          "terms_json": "{\"duration_months\": 52, \"sla\": \"premium\"}",
+          "created_at": "2025-08-09T17:03:34.740133"
+        },
+        {
+          "contract_id": 3,
+          "client_id": 121,
+          "proj_id": 663,
+          "amount": 1093101.62,
+          "signed_date": "2024-06-13",
+          "terms_json": "{\"duration_months\": 9, \"sla\": \"premium\"}",
+          "created_at": "2025-08-09T17:03:34.740133"
+        },
+        {
+          "contract_id": 4,
+          "client_id": 249,
+          "proj_id": 305,
+          "amount": 387229.88,
+          "signed_date": "2021-05-26",
+          "terms_json": "{\"duration_months\": 54, \"sla\": \"premium\"}",
+          "created_at": "2025-08-09T17:03:34.740133"
+        },
+        {
+          "contract_id": 5,
+          "client_id": 223,
+          "proj_id": 351,
+          "amount": 1236191.0,
+          "signed_date": "2021-02-19",
+          "terms_json": "{\"duration_months\": 37, \"sla\": \"none\"}",
+          "created_at": "2025-08-09T17:03:34.740133"
+        },
+        {
+          "contract_id": 6,
+          "client_id": 325,
+          "proj_id": 421,
+          "amount": 312449.34,
+          "signed_date": "2022-01-09",
+          "terms_json": "{\"duration_months\": 56, \"sla\": \"none\"}",
+          "created_at": "2025-08-09T17:03:34.740133"
+        },
+        {
+          "contract_id": 7,
+          "client_id": 116,
+          "proj_id": 350,
+          "amount": 1209480.57,
+          "signed_date": "2023-03-18",
+          "terms_json": "{\"duration_months\": 60, \"sla\": \"standard\"}",
+          "created_at": "2025-08-09T17:03:34.740133"
+        },
+        {
+          "contract_id": 8,
+          "client_id": 379,
+          "proj_id": 271,
+          "amount": 1161532.37,
+          "signed_date": "2023-07-28",
+          "terms_json": "{\"duration_months\": 25, \"sla\": \"none\"}",
+          "created_at": "2025-08-09T17:03:34.740133"
+        },
+        {
+          "contract_id": 9,
+          "client_id": 54,
+          "proj_id": 396,
+          "amount": 189881.66,
+          "signed_date": "2020-11-30",
+          "terms_json": "{\"duration_months\": 12, \"sla\": \"premium\"}",
+          "created_at": "2025-08-09T17:03:34.740133"
+        },
+        {
+          "contract_id": 10,
+          "client_id": 213,
+          "proj_id": 534,
+          "amount": 182402.21,
+          "signed_date": "2022-02-20",
+          "terms_json": "{\"duration_months\": 9, \"sla\": \"standard\"}",
+          "created_at": "2025-08-09T17:03:34.740133"
+        }
+      ],
+      "relationships": []
+    },
+    "skills": {
+      "name": "skills",
+      "columns": {
+        "skill_id": {
+          "name": "skill_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "name": {
+          "name": "name",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Python",
+            "SQL",
+            "Java",
+            "C++"
+          ]
+        }
+      },
+      "foreign_keys": [],
+      "row_count": 60,
+      "sample_data": [
+        {
+          "skill_id": 1,
+          "name": "Python"
+        },
+        {
+          "skill_id": 2,
+          "name": "SQL"
+        },
+        {
+          "skill_id": 3,
+          "name": "Java"
+        },
+        {
+          "skill_id": 4,
+          "name": "C++"
+        },
+        {
+          "skill_id": 5,
+          "name": "Go"
+        },
+        {
+          "skill_id": 6,
+          "name": "Rust"
+        },
+        {
+          "skill_id": 7,
+          "name": "Management"
+        },
+        {
+          "skill_id": 8,
+          "name": "Design"
+        },
+        {
+          "skill_id": 9,
+          "name": "Data Analysis"
+        },
+        {
+          "skill_id": 10,
+          "name": "ML"
+        }
+      ],
+      "relationships": []
+    },
+    "employee_skills": {
+      "name": "employee_skills",
+      "columns": {
+        "emp_id": {
+          "name": "emp_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": "employees.emp_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2,
+            3
+          ]
+        },
+        "skill_id": {
+          "name": "skill_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": "skills.skill_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            36,
+            34,
+            42,
+            23,
+            52,
+            11,
+            22,
+            26,
+            6,
+            20
+          ]
+        },
+        "level": {
+          "name": "level",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2,
+            5
+          ]
+        }
+      },
+      "foreign_keys": [
+        {
+          "column": "skill_id",
+          "ref_table": "skills",
+          "ref_column": "skill_id"
+        },
+        {
+          "column": "emp_id",
+          "ref_table": "employees",
+          "ref_column": "emp_id"
+        }
+      ],
+      "row_count": 34675,
+      "sample_data": [
+        {
+          "emp_id": 1,
+          "skill_id": 36,
+          "level": 1
+        },
+        {
+          "emp_id": 1,
+          "skill_id": 34,
+          "level": 2
+        },
+        {
+          "emp_id": 1,
+          "skill_id": 42,
+          "level": 2
+        },
+        {
+          "emp_id": 2,
+          "skill_id": 23,
+          "level": 5
+        },
+        {
+          "emp_id": 2,
+          "skill_id": 52,
+          "level": 4
+        },
+        {
+          "emp_id": 3,
+          "skill_id": 11,
+          "level": 4
+        },
+        {
+          "emp_id": 3,
+          "skill_id": 22,
+          "level": 5
+        },
+        {
+          "emp_id": 3,
+          "skill_id": 26,
+          "level": 4
+        },
+        {
+          "emp_id": 3,
+          "skill_id": 6,
+          "level": 2
+        },
+        {
+          "emp_id": 3,
+          "skill_id": 20,
+          "level": 3
+        }
+      ],
+      "relationships": []
+    },
+    "emp_projects": {
+      "name": "emp_projects",
+      "columns": {
+        "emp_id": {
+          "name": "emp_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": "employees.emp_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            585,
+            5053,
+            4938,
+            4931,
+            3553,
+            5351,
+            4348,
+            2502,
+            5941,
+            8633
+          ]
+        },
+        "proj_id": {
+          "name": "proj_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": "projects.proj_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            845,
+            406,
+            880,
+            4
+          ]
+        },
+        "assigned_at": {
+          "name": "assigned_at",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2025-05-24",
+            "2024-04-29",
+            "2022-12-24",
+            "2022-11-25"
+          ]
+        },
+        "role_on_project": {
+          "name": "role_on_project",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "contributor",
+            "pm",
+            "architect"
+          ]
+        },
+        "allocation_percent": {
+          "name": "allocation_percent",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            29,
+            23,
+            95,
+            41
+          ]
+        }
+      },
+      "foreign_keys": [
+        {
+          "column": "proj_id",
+          "ref_table": "projects",
+          "ref_column": "proj_id"
+        },
+        {
+          "column": "emp_id",
+          "ref_table": "employees",
+          "ref_column": "emp_id"
+        }
+      ],
+      "row_count": 19972,
+      "sample_data": [
+        {
+          "emp_id": 585,
+          "proj_id": 845,
+          "assigned_at": "2025-05-24",
+          "role_on_project": "contributor",
+          "allocation_percent": 29
+        },
+        {
+          "emp_id": 5053,
+          "proj_id": 406,
+          "assigned_at": "2024-04-29",
+          "role_on_project": "pm",
+          "allocation_percent": 23
+        },
+        {
+          "emp_id": 4938,
+          "proj_id": 880,
+          "assigned_at": "2022-12-24",
+          "role_on_project": "contributor",
+          "allocation_percent": 95
+        },
+        {
+          "emp_id": 4931,
+          "proj_id": 4,
+          "assigned_at": "2022-11-25",
+          "role_on_project": "architect",
+          "allocation_percent": 41
+        },
+        {
+          "emp_id": 3553,
+          "proj_id": 895,
+          "assigned_at": "2025-01-04",
+          "role_on_project": "contributor",
+          "allocation_percent": 44
+        },
+        {
+          "emp_id": 5351,
+          "proj_id": 851,
+          "assigned_at": "2025-01-17",
+          "role_on_project": "architect",
+          "allocation_percent": 64
+        },
+        {
+          "emp_id": 4348,
+          "proj_id": 152,
+          "assigned_at": "2023-12-15",
+          "role_on_project": "architect",
+          "allocation_percent": 29
+        },
+        {
+          "emp_id": 2502,
+          "proj_id": 548,
+          "assigned_at": "2022-08-26",
+          "role_on_project": "tester",
+          "allocation_percent": 44
+        },
+        {
+          "emp_id": 5941,
+          "proj_id": 727,
+          "assigned_at": "2025-05-01",
+          "role_on_project": "lead",
+          "allocation_percent": 10
+        },
+        {
+          "emp_id": 8633,
+          "proj_id": 942,
+          "assigned_at": "2022-09-03",
+          "role_on_project": "lead",
+          "allocation_percent": 16
+        }
+      ],
+      "relationships": []
+    },
+    "assets": {
+      "name": "assets",
+      "columns": {
+        "asset_id": {
+          "name": "asset_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "name": {
+          "name": "name",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Laptop Air",
+            "Laptop Ground",
+            "Furniture Simple",
+            "Server Fall"
+          ]
+        },
+        "type": {
+          "name": "type",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Furniture",
+            "Transport",
+            "IT"
+          ]
+        },
+        "owner_emp": {
+          "name": "owner_emp",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": "employees.emp_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            4411,
+            8111,
+            3370,
+            1833
+          ]
+        },
+        "purchase_date": {
+          "name": "purchase_date",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2021-01-02",
+            "2025-07-02",
+            "2020-03-18",
+            "2021-03-17"
+          ]
+        },
+        "value": {
+          "name": "value",
+          "type": "REAL",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            35375.0,
+            2918.09,
+            38569.51,
+            29351.59
+          ]
+        },
+        "metadata_json": {
+          "name": "metadata_json",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "{\"warranty_years\": 2, \"serial\": \"e551aec0-12b0-4918-bcd4-b24005f802cd\"}",
+            "{\"warranty_years\": 4, \"serial\": \"6ce2b0e9-f213-40ef-8dbd-c55a88208057\"}",
+            "{\"warranty_years\": 2, \"serial\": \"1388d933-7f9c-41c0-9dab-e3c00bc3de90\"}",
+            "{\"warranty_years\": 1, \"serial\": \"9b0e654d-6df6-448f-9af0-f8e138e3187e\"}"
+          ]
+        }
+      },
+      "foreign_keys": [
+        {
+          "column": "owner_emp",
+          "ref_table": "employees",
+          "ref_column": "emp_id"
+        }
+      ],
+      "row_count": 2000,
+      "sample_data": [
+        {
+          "asset_id": 1,
+          "name": "Laptop Air",
+          "type": "Furniture",
+          "owner_emp": 4411,
+          "purchase_date": "2021-01-02",
+          "value": 35375.0,
+          "metadata_json": "{\"warranty_years\": 2, \"serial\": \"e551aec0-12b0-4918-bcd4-b24005f802cd\"}"
+        },
+        {
+          "asset_id": 2,
+          "name": "Laptop Ground",
+          "type": "Transport",
+          "owner_emp": 8111,
+          "purchase_date": "2025-07-02",
+          "value": 2918.09,
+          "metadata_json": "{\"warranty_years\": 4, \"serial\": \"6ce2b0e9-f213-40ef-8dbd-c55a88208057\"}"
+        },
+        {
+          "asset_id": 3,
+          "name": "Furniture Simple",
+          "type": "Transport",
+          "owner_emp": 3370,
+          "purchase_date": "2020-03-18",
+          "value": 38569.51,
+          "metadata_json": "{\"warranty_years\": 2, \"serial\": \"1388d933-7f9c-41c0-9dab-e3c00bc3de90\"}"
+        },
+        {
+          "asset_id": 4,
+          "name": "Server Fall",
+          "type": "IT",
+          "owner_emp": 1833,
+          "purchase_date": "2021-03-17",
+          "value": 29351.59,
+          "metadata_json": "{\"warranty_years\": 1, \"serial\": \"9b0e654d-6df6-448f-9af0-f8e138e3187e\"}"
+        },
+        {
+          "asset_id": 5,
+          "name": "Vehicle Want",
+          "type": "IT",
+          "owner_emp": 6806,
+          "purchase_date": "2020-12-23",
+          "value": 32184.6,
+          "metadata_json": "{\"warranty_years\": 5, \"serial\": \"d4f6f69e-bb42-49ce-b306-e2a60a6df568\"}"
+        },
+        {
+          "asset_id": 6,
+          "name": "Phone Party",
+          "type": "Transport",
+          "owner_emp": 2190,
+          "purchase_date": "2023-02-20",
+          "value": 49534.28,
+          "metadata_json": "{\"warranty_years\": 4, \"serial\": \"62dec051-957f-4161-8c2c-b90a4f490cf5\"}"
+        },
+        {
+          "asset_id": 7,
+          "name": "Server Sure",
+          "type": "Furniture",
+          "owner_emp": 8284,
+          "purchase_date": "2024-01-29",
+          "value": 14103.36,
+          "metadata_json": "{\"warranty_years\": 4, \"serial\": \"19f08c72-f145-40b8-b319-5d1d60adc144\"}"
+        },
+        {
+          "asset_id": 8,
+          "name": "Laptop Near",
+          "type": "Transport",
+          "owner_emp": 4857,
+          "purchase_date": "2020-07-20",
+          "value": 4926.06,
+          "metadata_json": "{\"warranty_years\": 4, \"serial\": \"ac046f5a-3e79-449f-87c6-f71e1c2107ef\"}"
+        },
+        {
+          "asset_id": 9,
+          "name": "Monitor Very",
+          "type": "Furniture",
+          "owner_emp": 3337,
+          "purchase_date": "2020-03-18",
+          "value": 25327.45,
+          "metadata_json": "{\"warranty_years\": 4, \"serial\": \"c6ade005-9388-4cd9-a1f7-463f465eb9a5\"}"
+        },
+        {
+          "asset_id": 10,
+          "name": "Monitor And",
+          "type": "Furniture",
+          "owner_emp": 6965,
+          "purchase_date": "2024-01-14",
+          "value": 22622.43,
+          "metadata_json": "{\"warranty_years\": 2, \"serial\": \"d6b210f3-a75b-46ca-8e9f-ef50441cf10d\"}"
+        }
+      ],
+      "relationships": []
+    },
+    "asset_history": {
+      "name": "asset_history",
+      "columns": {
+        "hist_id": {
+          "name": "hist_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "asset_id": {
+          "name": "asset_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": "assets.asset_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1
+          ]
+        },
+        "change_date": {
+          "name": "change_date",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2025-01-17",
+            "2021-11-21",
+            "2024-09-04",
+            "2022-04-22"
+          ]
+        },
+        "note": {
+          "name": "note",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Enter modern executive offer inside week activity continue approach policy.",
+            "Course over investment record dog realize Congress down.",
+            "Threat want dog lose trip particular who.",
+            "Too agree military beyond cultural key dark course."
+          ]
+        }
+      },
+      "foreign_keys": [
+        {
+          "column": "asset_id",
+          "ref_table": "assets",
+          "ref_column": "asset_id"
+        }
+      ],
+      "row_count": 5901,
+      "sample_data": [
+        {
+          "hist_id": 1,
+          "asset_id": 1,
+          "change_date": "2025-01-17",
+          "note": "Enter modern executive offer inside week activity continue approach policy."
+        },
+        {
+          "hist_id": 2,
+          "asset_id": 1,
+          "change_date": "2021-11-21",
+          "note": "Course over investment record dog realize Congress down."
+        },
+        {
+          "hist_id": 3,
+          "asset_id": 1,
+          "change_date": "2024-09-04",
+          "note": "Threat want dog lose trip particular who."
+        },
+        {
+          "hist_id": 4,
+          "asset_id": 1,
+          "change_date": "2022-04-22",
+          "note": "Too agree military beyond cultural key dark course."
+        },
+        {
+          "hist_id": 5,
+          "asset_id": 2,
+          "change_date": "2021-10-18",
+          "note": "Certainly say season discussion quality eye old represent indicate."
+        },
+        {
+          "hist_id": 6,
+          "asset_id": 2,
+          "change_date": "2021-04-06",
+          "note": "Describe fish church plan consumer nearly him."
+        },
+        {
+          "hist_id": 7,
+          "asset_id": 2,
+          "change_date": "2024-01-10",
+          "note": "Computer use TV common quite important two leave surface center."
+        },
+        {
+          "hist_id": 8,
+          "asset_id": 2,
+          "change_date": "2025-06-14",
+          "note": "Across interest enough eat seek box our gas pick democratic."
+        },
+        {
+          "hist_id": 9,
+          "asset_id": 2,
+          "change_date": "2022-07-26",
+          "note": "Test at seem most role cell instead night great."
+        },
+        {
+          "hist_id": 10,
+          "asset_id": 3,
+          "change_date": "2024-06-12",
+          "note": "Item eat surface firm evidence believe activity."
+        }
+      ],
+      "relationships": []
+    },
+    "addresses": {
+      "name": "addresses",
+      "columns": {
+        "addr_id": {
+          "name": "addr_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "emp_id": {
+          "name": "emp_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": "employees.emp_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "line1": {
+          "name": "line1",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "6090 Bell Bridge Apt. 896",
+            "9866 Victoria Canyon Suite 977",
+            "20863 Patricia Port Apt. 668",
+            "17146 Kimberly Circle Suite 098"
+          ]
+        },
+        "city": {
+          "name": "city",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Martinberg",
+            "Jillianview",
+            "Rogersmouth",
+            "North Tinaside"
+          ]
+        },
+        "state": {
+          "name": "state",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "OH",
+            "OR",
+            "CT",
+            "PW"
+          ]
+        },
+        "postal_code": {
+          "name": "postal_code",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "57304",
+            "04862",
+            "44649",
+            "75757"
+          ]
+        },
+        "country": {
+          "name": "country",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "Portugal",
+            "Bolivia",
+            "Uruguay",
+            "Northern Mariana Islands"
+          ]
+        },
+        "geo": {
+          "name": "geo",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "67.0211,175.271332",
+            "-29.872242,-140.919762",
+            "-74.798829,24.815327",
+            "-14.615908,-158.302574"
+          ]
+        },
+        "is_primary": {
+          "name": "is_primary",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": "0",
+          "sample_values": [
+            1
+          ]
+        }
+      },
+      "foreign_keys": [
+        {
+          "column": "emp_id",
+          "ref_table": "employees",
+          "ref_column": "emp_id"
+        }
+      ],
+      "row_count": 10995,
+      "sample_data": [
+        {
+          "addr_id": 1,
+          "emp_id": 1,
+          "line1": "6090 Bell Bridge Apt. 896",
+          "city": "Martinberg",
+          "state": "OH",
+          "postal_code": "57304",
+          "country": "Portugal",
+          "geo": "67.0211,175.271332",
+          "is_primary": 1
+        },
+        {
+          "addr_id": 2,
+          "emp_id": 2,
+          "line1": "9866 Victoria Canyon Suite 977",
+          "city": "Jillianview",
+          "state": "OR",
+          "postal_code": "04862",
+          "country": "Bolivia",
+          "geo": "-29.872242,-140.919762",
+          "is_primary": 1
+        },
+        {
+          "addr_id": 3,
+          "emp_id": 3,
+          "line1": "20863 Patricia Port Apt. 668",
+          "city": "Rogersmouth",
+          "state": "CT",
+          "postal_code": "44649",
+          "country": "Uruguay",
+          "geo": "-74.798829,24.815327",
+          "is_primary": 1
+        },
+        {
+          "addr_id": 4,
+          "emp_id": 4,
+          "line1": "17146 Kimberly Circle Suite 098",
+          "city": "North Tinaside",
+          "state": "PW",
+          "postal_code": "75757",
+          "country": "Northern Mariana Islands",
+          "geo": "-14.615908,-158.302574",
+          "is_primary": 1
+        },
+        {
+          "addr_id": 5,
+          "emp_id": 5,
+          "line1": "261 Lynn Plaza",
+          "city": "Port Summer",
+          "state": "TX",
+          "postal_code": "74500",
+          "country": "Haiti",
+          "geo": "-50.277291,-28.665751",
+          "is_primary": 1
+        },
+        {
+          "addr_id": 6,
+          "emp_id": 5,
+          "line1": "28989 Vincent Drives",
+          "city": "North Joshua",
+          "state": "OR",
+          "postal_code": "95933",
+          "country": "Bolivia",
+          "geo": "-86.768384,-54.453165",
+          "is_primary": 0
+        },
+        {
+          "addr_id": 7,
+          "emp_id": 6,
+          "line1": "833 Willie Valley",
+          "city": "Millerton",
+          "state": "AK",
+          "postal_code": "48999",
+          "country": "Botswana",
+          "geo": "-57.335948,-163.985861",
+          "is_primary": 1
+        },
+        {
+          "addr_id": 8,
+          "emp_id": 7,
+          "line1": "55089 Dalton Villages",
+          "city": "Campbellville",
+          "state": "KY",
+          "postal_code": "72093",
+          "country": "Palestinian Territory",
+          "geo": "-42.724424,111.999299",
+          "is_primary": 1
+        },
+        {
+          "addr_id": 9,
+          "emp_id": 7,
+          "line1": "781 Campbell Stream",
+          "city": "Barbaraside",
+          "state": "WI",
+          "postal_code": "20524",
+          "country": "Israel",
+          "geo": "72.579888,-174.801139",
+          "is_primary": 0
+        },
+        {
+          "addr_id": 10,
+          "emp_id": 8,
+          "line1": "185 Rowe Prairie",
+          "city": "Lake Michael",
+          "state": "GA",
+          "postal_code": "58623",
+          "country": "Lesotho",
+          "geo": "24.424119,125.304483",
+          "is_primary": 1
+        }
+      ],
+      "relationships": []
+    },
+    "events": {
+      "name": "events",
+      "columns": {
+        "event_id": {
+          "name": "event_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "emp_id": {
+          "name": "emp_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": "employees.emp_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2
+          ]
+        },
+        "event_time": {
+          "name": "event_time",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2024-01-14T07:37:35.202079",
+            "2024-12-14T16:53:33.205287",
+            "2023-01-22T12:44:33.205333",
+            "2024-04-19T04:42:09.206471"
+          ]
+        },
+        "event_type": {
+          "name": "event_type",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "policy_ack",
+            "promotion"
+          ]
+        },
+        "details_json": {
+          "name": "details_json",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "{\"ip\": \"199.224.186.87\", \"meta\": \"Check positive weight.\"}",
+            "{\"ip\": \"208.82.37.33\", \"meta\": \"Animal company strong stop.\"}",
+            "{\"ip\": \"31.94.204.55\", \"meta\": \"Relate song artist option.\"}",
+            "{\"ip\": \"115.119.1.230\", \"meta\": \"Able simply she card be media.\"}"
+          ]
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2025-08-09T17:03:36.205285",
+            "2025-08-09T17:03:36.205329",
+            "2025-08-09T17:03:36.206470",
+            "2025-08-09T17:03:36.206495"
+          ]
+        }
+      },
+      "foreign_keys": [
+        {
+          "column": "emp_id",
+          "ref_table": "employees",
+          "ref_column": "emp_id"
+        }
+      ],
+      "row_count": 30058,
+      "sample_data": [
+        {
+          "event_id": 1,
+          "emp_id": 1,
+          "event_time": "2024-01-14T07:37:35.202079",
+          "event_type": "policy_ack",
+          "details_json": "{\"ip\": \"199.224.186.87\", \"meta\": \"Check positive weight.\"}",
+          "created_at": "2025-08-09T17:03:36.205285"
+        },
+        {
+          "event_id": 2,
+          "emp_id": 1,
+          "event_time": "2024-12-14T16:53:33.205287",
+          "event_type": "policy_ack",
+          "details_json": "{\"ip\": \"208.82.37.33\", \"meta\": \"Animal company strong stop.\"}",
+          "created_at": "2025-08-09T17:03:36.205329"
+        },
+        {
+          "event_id": 3,
+          "emp_id": 2,
+          "event_time": "2023-01-22T12:44:33.205333",
+          "event_type": "policy_ack",
+          "details_json": "{\"ip\": \"31.94.204.55\", \"meta\": \"Relate song artist option.\"}",
+          "created_at": "2025-08-09T17:03:36.206470"
+        },
+        {
+          "event_id": 4,
+          "emp_id": 2,
+          "event_time": "2024-04-19T04:42:09.206471",
+          "event_type": "promotion",
+          "details_json": "{\"ip\": \"115.119.1.230\", \"meta\": \"Able simply she card be media.\"}",
+          "created_at": "2025-08-09T17:03:36.206495"
+        },
+        {
+          "event_id": 5,
+          "emp_id": 2,
+          "event_time": "2023-03-17T12:07:47.206496",
+          "event_type": "access_request",
+          "details_json": "{\"ip\": \"205.209.214.115\", \"meta\": \"Sea pretty idea morning.\"}",
+          "created_at": "2025-08-09T17:03:36.206531"
+        },
+        {
+          "event_id": 6,
+          "emp_id": 3,
+          "event_time": "2025-05-18T05:41:43.206534",
+          "event_type": "logout",
+          "details_json": "{\"ip\": \"216.9.41.80\", \"meta\": \"East catch early car action.\"}",
+          "created_at": "2025-08-09T17:03:36.206567"
+        },
+        {
+          "event_id": 7,
+          "emp_id": 3,
+          "event_time": "2025-03-20T06:48:41.206568",
+          "event_type": "policy_ack",
+          "details_json": "{\"ip\": \"139.51.196.163\", \"meta\": \"Cost play training computer.\"}",
+          "created_at": "2025-08-09T17:03:36.207475"
+        },
+        {
+          "event_id": 8,
+          "emp_id": 4,
+          "event_time": "2024-09-06T13:32:47.207477",
+          "event_type": "password_change",
+          "details_json": "{\"ip\": \"64.160.189.30\", \"meta\": \"Tree toward control heavy.\"}",
+          "created_at": "2025-08-09T17:03:36.207502"
+        },
+        {
+          "event_id": 9,
+          "emp_id": 5,
+          "event_time": "2025-06-09T00:00:12.207504",
+          "event_type": "promotion",
+          "details_json": "{\"ip\": \"85.236.47.139\", \"meta\": \"Couple window Congress professor.\"}",
+          "created_at": "2025-08-09T17:03:36.207526"
+        },
+        {
+          "event_id": 10,
+          "emp_id": 5,
+          "event_time": "2022-10-16T09:36:41.207527",
+          "event_type": "access_request",
+          "details_json": "{\"ip\": \"170.50.11.209\", \"meta\": \"Tree need consumer discover lawyer field result century.\"}",
+          "created_at": "2025-08-09T17:03:36.207549"
+        }
+      ],
+      "relationships": []
+    },
+    "salaries": {
+      "name": "salaries",
+      "columns": {
+        "sal_id": {
+          "name": "sal_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        "emp_id": {
+          "name": "emp_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": "employees.emp_id",
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            1,
+            2
+          ]
+        },
+        "effective_date": {
+          "name": "effective_date",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2024-10-07",
+            "2025-03-25",
+            "2022-03-13",
+            "2022-04-20"
+          ]
+        },
+        "salary": {
+          "name": "salary",
+          "type": "REAL",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            71287.43,
+            52508.66,
+            22119.79,
+            20223.95
+          ]
+        },
+        "reason": {
+          "name": "reason",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "raise",
+            "correction",
+            "hire"
+          ]
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": [
+            "2025-08-09T17:03:37.022611",
+            "2025-08-09T17:03:37.022616",
+            "2025-08-09T17:03:37.022620",
+            "2025-08-09T17:03:37.022623"
+          ]
+        }
+      },
+      "foreign_keys": [
+        {
+          "column": "emp_id",
+          "ref_table": "employees",
+          "ref_column": "emp_id"
+        }
+      ],
+      "row_count": 24999,
+      "sample_data": [
+        {
+          "sal_id": 1,
+          "emp_id": 1,
+          "effective_date": "2024-10-07",
+          "salary": 71287.43,
+          "reason": "raise",
+          "created_at": "2025-08-09T17:03:37.022611"
+        },
+        {
+          "sal_id": 2,
+          "emp_id": 1,
+          "effective_date": "2025-03-25",
+          "salary": 52508.66,
+          "reason": "correction",
+          "created_at": "2025-08-09T17:03:37.022616"
+        },
+        {
+          "sal_id": 3,
+          "emp_id": 1,
+          "effective_date": "2022-03-13",
+          "salary": 22119.79,
+          "reason": "hire",
+          "created_at": "2025-08-09T17:03:37.022620"
+        },
+        {
+          "sal_id": 4,
+          "emp_id": 2,
+          "effective_date": "2022-04-20",
+          "salary": 20223.95,
+          "reason": "raise",
+          "created_at": "2025-08-09T17:03:37.022623"
+        },
+        {
+          "sal_id": 5,
+          "emp_id": 3,
+          "effective_date": "2022-08-28",
+          "salary": 30185.75,
+          "reason": "hire",
+          "created_at": "2025-08-09T17:03:37.022627"
+        },
+        {
+          "sal_id": 6,
+          "emp_id": 3,
+          "effective_date": "2022-07-15",
+          "salary": 21463.56,
+          "reason": "hire",
+          "created_at": "2025-08-09T17:03:37.022630"
+        },
+        {
+          "sal_id": 7,
+          "emp_id": 3,
+          "effective_date": "2021-08-22",
+          "salary": 39034.22,
+          "reason": "promotion",
+          "created_at": "2025-08-09T17:03:37.022633"
+        },
+        {
+          "sal_id": 8,
+          "emp_id": 3,
+          "effective_date": "2023-09-23",
+          "salary": 20000.0,
+          "reason": "correction",
+          "created_at": "2025-08-09T17:03:37.022640"
+        },
+        {
+          "sal_id": 9,
+          "emp_id": 4,
+          "effective_date": "2024-01-03",
+          "salary": 20000.0,
+          "reason": "correction",
+          "created_at": "2025-08-09T17:03:37.022644"
+        },
+        {
+          "sal_id": 10,
+          "emp_id": 4,
+          "effective_date": "2020-08-21",
+          "salary": 29982.25,
+          "reason": "correction",
+          "created_at": "2025-08-09T17:03:37.022647"
+        }
+      ],
+      "relationships": []
+    },
+    "audit_log": {
+      "name": "audit_log",
+      "columns": {
+        "audit_id": {
+          "name": "audit_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": true,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": []
+        },
+        "table_name": {
+          "name": "table_name",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": []
+        },
+        "action": {
+          "name": "action",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": []
+        },
+        "row_id": {
+          "name": "row_id",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": []
+        },
+        "diff": {
+          "name": "diff",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": []
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "foreign_key": null,
+          "unique": false,
+          "default_value": null,
+          "sample_values": []
+        }
+      },
+      "foreign_keys": [],
+      "row_count": 0,
+      "sample_data": [],
+      "relationships": []
+    }
+  },
+  "relationships": {
+    "employees": [
+      "employees",
+      "departments",
+      "tasks",
+      "employee_skills",
+      "emp_projects",
+      "assets",
+      "addresses",
+      "events",
+      "salaries"
+    ],
+    "departments": [
+      "employees",
+      "projects"
+    ],
+    "projects": [
+      "departments",
+      "tasks",
+      "contracts",
+      "emp_projects"
+    ],
+    "tasks": [
+      "employees",
+      "projects"
+    ],
+    "contracts": [
+      "projects",
+      "clients"
+    ],
+    "clients": [
+      "contracts"
+    ],
+    "employee_skills": [
+      "skills",
+      "employees"
+    ],
+    "skills": [
+      "employee_skills"
+    ],
+    "emp_projects": [
+      "projects",
+      "employees"
+    ],
+    "assets": [
+      "employees",
+      "asset_history"
+    ],
+    "asset_history": [
+      "assets"
+    ],
+    "addresses": [
+      "employees"
+    ],
+    "events": [
+      "employees"
+    ],
+    "salaries": [
+      "employees"
+    ]
+  },
+  "rag_collection_name": null,
+  "last_analyzed": "2025-08-11T22:36:51.250228",
+  "statistics": {
+    "total_tables": 15,
+    "total_columns": 98,
+    "total_rows": 153524,
+    "tables_with_fk": 11,
+    "last_analyzed": "2025-08-11T22:36:51.250228"
+  }
+}
