@@ -13,6 +13,8 @@ logger = logging.getLogger(__name__)
 
 class SpeechService:
     def __init__(self):
+        """ summary_
+        """
         self.model: Optional[Model] = None
         self.is_initialized = False
     
@@ -67,12 +69,13 @@ class SpeechService:
             
             # Convert to PCM format
             pcm_file_path = tempfile.NamedTemporaryFile(delete=False, suffix=".pcm").name
-            
+
             await self._convert_to_pcm(temp_file_path, pcm_file_path)
+            logger.info(f"Converting audio to PCM format: {pcm_file_path}")
             
             # Transcribe using Vosk
             transcribed_text = await self._transcribe_with_vosk(pcm_file_path)
-            
+
             logger.info(f"Transcription successful: '{transcribed_text}'")
             return transcribed_text
             
